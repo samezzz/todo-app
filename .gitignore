@@ -36,3 +36,4 @@ frontend/*.tsbuildinfo
 frontend/next-env.d.ts
 
 /venv/
+backend/.env
