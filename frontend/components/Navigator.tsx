@@ -36,7 +36,7 @@ const Navigator: React.FC<Props> = ({ children }) => {
       <div className={content({active})}>
         <Header isActiveNav={active} onButtonClick={toggleSidebar} />
         {nav && <Banner title={nav.title} src={nav.photo} />}
-        <div>
+        <div className="relative flex-1">
           {children}
         </div>
       </div>

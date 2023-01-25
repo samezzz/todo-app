@@ -5,7 +5,7 @@ export interface NavItemType {
   photo: string;
 }
 
-export interface TaskType {
+export interface TodoType {
   id: number;
   title: string;
   isFinished: boolean;

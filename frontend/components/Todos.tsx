@@ -1,7 +1,12 @@
 import React from 'react';
+import { getData } from './crud';
+import { TodoType } from '../interfaces/index';
 
-const Todos = () => {
+interface todo {
+  getData: TodoType;
+}
 
+const Todos: React.FC = () => {
   return (
     <div>
       Todos

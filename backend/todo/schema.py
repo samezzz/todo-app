@@ -35,15 +35,13 @@ class UpdateTodo(graphene.Mutation):
   
   class Arguments:
     id = graphene.Int(required=True)
-    title = graphene.String(required=True)
     is_finished = graphene.Boolean()
   
-  def mutate(self, info, id, title, is_finished ):
+  def mutate(self, info, id, is_finished ):
     todo = Todo.objects.get(id=id)
     if is_finished:
       todo.is_finished = False
     todo.is_finished = True
-    todo.title = title
     todo.save()
     return UpdateTodo(todo=todo)
   
