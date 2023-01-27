@@ -39,11 +39,9 @@ class UpdateTodo(graphene.Mutation):
   
   def mutate(self, info, id, is_finished ):
     todo = Todo.objects.get(id=id)
-    if is_finished:
-      todo.is_finished = False
-    todo.is_finished = True
+    todo.is_finished = not todo.is_finished
     todo.save()
-    return UpdateTodo(todo=todo)
+    return UpdateTodo(todo=Todo.objects.get(id=id))
   
 class DeleteTodo(graphene.Mutation):
   message = graphene.String()

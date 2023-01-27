@@ -1,7 +1,7 @@
 import client from '../apollo-client';
 import { gql } from '@apollo/client';
 
-const GET_TODOS = gql`
+export const GET_TODOS = gql`
   query todos {
     todos {
     id
@@ -32,3 +32,13 @@ export const UPDATE_TODO = gql`
           }
         }
       `
+
+export const GET_UPDATED_TODO = gql`
+              query GetTodo($id: Int!){
+                todos(id: $id) {
+                  id
+                  title
+                  isFinished
+                }
+              }
+            `
