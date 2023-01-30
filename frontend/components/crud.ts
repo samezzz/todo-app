@@ -42,3 +42,11 @@ export const GET_UPDATED_TODO = gql`
                 }
               }
             `
+
+export const DELETE_TODO = gql`
+          mutation ($id:Int!) {
+            deleteTodo(id: $id) {
+              message
+          }
+}
+`
