@@ -25,14 +25,6 @@
     {
       "src": "/(.*)",
       "dest": "backend/.wsgi.py"
-    },
-    {
-      "src": "/admin/(.*)",
-      "dest": "backend/admin.py"
-    },
-    {
-      "src": "/graphiql/(.*)",
-      "dest": "backend/graphiql.py"
     }
   ]
 }
