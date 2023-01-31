@@ -10,6 +10,7 @@ import { TodoType } from '../interfaces/index';
 import AnimatedCheck from './AnimatedCheck';
 import { UPDATE_TODO } from './crud';
 import { GET_UPDATED_TODO } from './crud';
+import { GET_TODOS } from './crud';
 import { DELETE_TODO } from './crud';
 import Input from './Input';
 
@@ -52,27 +53,32 @@ const TaskItem: React.FC<Props> = ({data}) => {
 
   const handleDeleteTask = async (id: Partial<TodoType>, refresh: () => void) => {
     setLoading(true);
-    if (id && id.id) {
-      const intId = parseInt(id.id);
-      await client.mutate({
-        mutation: DELETE_TODO,
-        variables: {
-          id: intId,
-        },
-        update: (cache, { data }) => {
-          const cachedTodos = cache.readQuery({ query: GET_UPDATED_TODO });
-          const updatedTodos = cachedTodos.todos.filter((todo: TodoType) => todo.id !== intId);
-          cache.writeQuery({
-            query: GET_UPDATED_TODO,
-            data: { todos: updatedTodos },
-          });
-          console.log(cachedTodos)
-        },
-      });
-      refresh()
-      setLoading(false);
+    try {
+      if (id && id.id) {
+        const intId = parseInt(id.id);
+        await client.mutate({
+          mutation: DELETE_TODO,
+          variables: {
+            id: intId,
+          },
+          update: (cache, { data }) => {
+            const cachedTodos = cache.readQuery({ query: GET_TODOS });
+            if (!cachedTodos) return;
+            const updatedTodos = cachedTodos.todos.filter((todo: TodoType) => todo.id !== intId);
+            cache.writeQuery({
+              query: GET_TODOS,
+              data: { todos: updatedTodos },
+            });
+          },
+        });
+      }
+    } catch (error) {
+      console.error(error);
     }
+    setLoading(false);
+    refresh();
   };
+
 
 
   return (

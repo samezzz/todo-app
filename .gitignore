@@ -37,3 +37,4 @@ frontend/next-env.d.ts
 
 /venv/
 backend/*.env
+backend/*.sqlite3
