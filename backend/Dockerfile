@@ -11,3 +11,13 @@ COPY . .
 EXPOSE 8000
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+
+# {
+# "src": "Dockerfile",
+# "use": "@vercel/docker",
+# "config": { 
+# "maxLambdaSize": "15mb", 
+# "runtime": "python3.9"
+# }
+# },
